@@ -1,19 +1,25 @@
-import React from "react";
-import { ButtonProps } from "@/interfaces";
+import { type ButtonProps } from '@/interfaces';
 
-const Button: React.FC<ButtonProps> = ({ size = "medium", shape = "rounded-md", children, onClick }) => {
-  const sizeClasses = {
-    small: "px-2 py-1 text-sm",
-    medium: "px-4 py-2 text-base",
-    large: "px-6 py-3 text-lg"
-  };
+const Button: React.FC<ButtonProps> = ({ size, shape, label, onClick }) => {
+  let sizeClass = '';
+  switch (size) {
+    case 'small':
+      sizeClass = 'px-2 py-1 text-sm';
+      break;
+    case 'medium':
+      sizeClass = 'px-4 py-2 text-base';
+      break;
+    case 'large':
+      sizeClass = 'px-6 py-3 text-lg';
+      break;
+  }
 
   return (
     <button
+      className={`${sizeClass} bg-blue-600 text-white ${shape} hover:bg-blue-700 transition`}
       onClick={onClick}
-      className={`${sizeClasses[size]} bg-blue-600 text-white ${shape} hover:bg-blue-700 transition`}
     >
-      {children}
+      {label}
     </button>
   );
 };
