@@ -1,21 +1,19 @@
-import React from "react";
-import Header from "../components/layout/Header";
-import PostCard from "../components/common/PostCard";
-import { PostProps } from "../interfaces";
+// pages/posts.tsx
+import Header from "@/components/layout/Header";
+import PostCard from "@/components/common/PostCard"; // if using posts
+import { PostProps } from "@/interfaces";
 
-interface PostsPageProps {
-  posts: PostProps[];
-}
-
-const Posts: React.FC<PostsPageProps> = ({ posts }) => {
+const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
   return (
-    <div>
-      <Header />
-      <main className="p-6">
-        <h1 className="text-3xl font-bold mb-4">Posts</h1>
-        {posts.map(post => (
-          <PostCard key={post.id} {...post} />
-        ))}
+    <div className="flex flex-col h-screen">
+      <Header /> {/* Add the Header component here */}
+      <main className="p-4">
+        <h1 className="text-2xl font-semibold mb-4">Posts</h1>
+        <div className="grid grid-cols-3 gap-4">
+          {posts?.map((post, index) => (
+            <PostCard key={index} {...post} />
+          ))}
+        </div>
       </main>
     </div>
   );
